@@ -17,6 +17,9 @@ namespace KSTL
 		kVector& operator=(kVector&&) = delete; // Move assignment operator
 
 		void Push(int data);
+		void Print();
+		
+		int& operator[](int index);
 
 	private:
 		int* arr;
@@ -60,4 +63,20 @@ namespace KSTL
 
 
 	}
+
+	void kVector::Print()
+	{
+		for (int i = 0; i < current; ++i)
+		{
+			std::cout << arr[i] << " "; 
+		}
+		std::cout << std::endl;
+	}
+
+	int& kVector::operator[](int index)
+	{
+		return arr[index];
+	}
+
+
 }
