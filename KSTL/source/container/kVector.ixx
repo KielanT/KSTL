@@ -19,6 +19,9 @@ namespace KSTL
 		void Push(int data);
 		void Print();
 		
+		int* begin();
+		int* end();
+
 		int& operator[](int index);
 
 	private:
@@ -27,6 +30,7 @@ namespace KSTL
 		int current;
 
 		const int DEFAULT_CAPACITY = 1;
+
 	};
 
 	kVector::kVector()
@@ -71,6 +75,18 @@ namespace KSTL
 			std::cout << arr[i] << " "; 
 		}
 		std::cout << std::endl;
+	}
+
+	int* kVector::begin()
+	{
+		return &arr[0];
+	}
+
+	int* kVector::end()
+	{
+		// TODO: Standard Library end does not point to the last element in the array
+		// it has an extra element at the end that gets returned.
+		return &arr[capacity];
 	}
 
 	int& kVector::operator[](int index)
