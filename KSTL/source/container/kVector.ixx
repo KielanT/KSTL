@@ -17,7 +17,6 @@ namespace KSTL
 		kVector& operator=(kVector&&) = delete; // Move assignment operator
 
 		void Push(int data);
-		void Print();
 		
 		int* begin();
 		int* end();
@@ -68,14 +67,6 @@ namespace KSTL
 
 	}
 
-	void kVector::Print()
-	{
-		for (int i = 0; i < current; ++i)
-		{
-			std::cout << arr[i] << " "; 
-		}
-		std::cout << std::endl;
-	}
 
 	int* kVector::begin()
 	{

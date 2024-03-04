@@ -20,8 +20,6 @@ int main()
 		std::cout << i << " ";
 	}
 
-	
-
 	//std::cout << "indexed: " << kV[2] << std::endl;
 
 
