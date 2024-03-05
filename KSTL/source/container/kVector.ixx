@@ -1,8 +1,9 @@
 export module kVector;
 
 import <iostream>;
+import <memory>;
 
-namespace KSTL
+export namespace KSTL
 {
 
 	export class kVector
@@ -17,6 +18,7 @@ namespace KSTL
 		kVector& operator=(kVector&&) = delete; // Move assignment operator
 
 		void Push(int data);
+		void Pop();
 		
 		int* begin();
 		int* end();
@@ -67,6 +69,11 @@ namespace KSTL
 
 	}
 
+	void kVector::Pop()
+	{
+		current--;
+	}
+
 
 	int* kVector::begin()
 	{
@@ -77,7 +84,7 @@ namespace KSTL
 	{
 		// TODO: Standard Library end does not point to the last element in the array
 		// it has an extra element at the end that gets returned.
-		return &arr[capacity];
+		return &arr[current];
 	}
 
 	int& kVector::operator[](int index)
