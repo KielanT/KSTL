@@ -13,10 +13,6 @@ int main()
 	kV.Push(3);
 	kV.Push(4);
 
-	//kV.Print();
-
-	kV.Pop();
-
 	for (auto& i : kV)
 	{
 		std::cout << i << " ";
@@ -30,10 +26,11 @@ int main()
 	//******************
 
 	//std::vector<int> v;
-	//v.push_back(2);
-	//v.push_back(3);
-	//v.push_back(4);
+	/*v.push_back(2);
+	v.push_back(3);
+	v.push_back(4);
 	
+	auto b = v[5];*/
 
 	////for (auto& i : v)
 	////{
