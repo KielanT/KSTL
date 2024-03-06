@@ -1,6 +1,7 @@
 export module kVector;
 
 import <stdexcept>;
+import <algorithm>;
 
 export namespace KSTL
 {
@@ -10,6 +11,7 @@ export namespace KSTL
 	{
 	public:
 		kVector(); // Default constructor
+		kVector(std::initializer_list<T> list); // Default constructor
 		~kVector(); // Default destructor
 
 		kVector(const kVector&) = delete; // Copy constructor
@@ -24,12 +26,12 @@ export namespace KSTL
 		T* begin();
 		T* end();
 
-		T& operator[](int index);
+		T& operator[](size_t index);
 
 	private:
 		T* m_Arr;
-		int m_Capacity;
-		int m_Size;
+		size_t m_Capacity;
+		size_t m_Size;
 
 		static constexpr int DEFAULT_CAPACITY = 1;
 
@@ -41,6 +43,16 @@ export namespace KSTL
 		m_Arr = { new T[DEFAULT_CAPACITY] };
 		m_Capacity = { DEFAULT_CAPACITY };
 		m_Size = { 0 };
+	}
+
+	template<typename T>
+	kVector<T>::kVector(std::initializer_list<T> list)
+	{
+		m_Arr = new T[list.size()];
+		m_Capacity = list.size();
+		m_Size = list.size();
+		
+		std::copy(list.begin(), list.end(), m_Arr);
 	}
 
 	template<typename T>
@@ -114,7 +126,7 @@ export namespace KSTL
 	}
 
 	template<typename T>
-	T& kVector<T>::operator[](int index)
+	T& kVector<T>::operator[](size_t index)
 	{
 		if (index >= m_Size)
 			throw std::out_of_range{ "kVector::operator[]" };

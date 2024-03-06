@@ -7,13 +7,9 @@ import kVector;
 
 int main()
 {
-	KSTL::kVector<std::string> kV;
-	kV.Push("true");
-	kV.Push("true");
-	kV.Push("true");
-	kV.Push("false");
+	KSTL::kVector<int> kV = {0, 1, 2, 3};
 
-	kV.Pop();
+
 
 	for (auto& i : kV)
 	{
