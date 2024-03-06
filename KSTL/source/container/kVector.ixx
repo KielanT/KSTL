@@ -35,25 +35,20 @@ export namespace KSTL
 		size_t m_Capacity;
 		size_t m_Size;
 
-		static constexpr int DEFAULT_CAPACITY = 1;
+		static constexpr size_t DEFAULT_CAPACITY = 1;
 
 	};
 
 	template<typename T>
 	kVector<T>::kVector()
+		: m_Arr{ new T[DEFAULT_CAPACITY] }, m_Capacity{ DEFAULT_CAPACITY }, m_Size{ 0 }
 	{
-		m_Arr = new T[DEFAULT_CAPACITY];
-		m_Capacity = { DEFAULT_CAPACITY };
-		m_Size = { 0 };
 	}
 
 	template<typename T>
 	kVector<T>::kVector(std::initializer_list<T> list)
+		: m_Arr{ new T[list.size()] }, m_Capacity{ list.size() }, m_Size{ list.size() }
 	{
-		m_Arr = new T[list.size()];
-		m_Capacity = { list.size() };
-		m_Size = { list.size() };
-		
 		std::copy(list.begin(), list.end(), m_Arr);
 	}
 
@@ -65,11 +60,8 @@ export namespace KSTL
 
 	template<typename T>
 	kVector<T>::kVector(const kVector& inVector)
+		: m_Arr{ new T[inVector.Size()] }, m_Capacity{ inVector.Size() }, m_Size{ inVector.Size() }
 	{
-		m_Arr = new T[inVector.Size()];
-		m_Capacity = { inVector.Size() };
-		m_Size = { inVector.Size() };
-
 		for (size_t i = 0; i < m_Size; ++i)
 		{
 			m_Arr[i] = inVector.m_Arr[i];
@@ -91,7 +83,6 @@ export namespace KSTL
 		delete[] m_Arr;
 		m_Arr = temp;
 		
-
 		return *this;
 	}
 
@@ -103,7 +94,7 @@ export namespace KSTL
 			m_Capacity *= 2;
 			T* temp = { new T[m_Capacity] };
 
-			for (int i = 0; i < m_Size; ++i)
+			for (size_t i = 0; i < m_Size; ++i)
 			{
 				temp[i] = m_Arr[i];
 			}
@@ -125,7 +116,7 @@ export namespace KSTL
 			m_Capacity *= 2;
 			T* temp = { new T[m_Capacity] };
 
-			for (int i = 0; i < m_Size; ++i)
+			for (size_t i = 0; i < m_Size; ++i)
 			{
 				temp[i] = m_Arr[i];
 			}
