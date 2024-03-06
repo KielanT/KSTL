@@ -3,7 +3,7 @@ export module kVector;
 import <stdexcept>;
 import <algorithm>;
 
-export namespace KSTL
+namespace KSTL
 {
 
 	export template<typename T>
