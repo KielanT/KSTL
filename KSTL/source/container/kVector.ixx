@@ -29,6 +29,8 @@ export namespace KSTL
 		const size_t Size() const;
 
 		T& operator[](size_t index);
+		const T& operator[](size_t index) const;
+
 
 	private:
 		T* m_Arr;
@@ -191,6 +193,32 @@ export namespace KSTL
 		return m_Arr[index];
 	}
 
+	template<typename T>
+	const T& kVector<T>::operator[](size_t index) const
+	{
+		if (index >= m_Size)
+			throw std::out_of_range{ "kVector::operator[]" };
 
+		return m_Arr[index];
+	}
 
+	/*******************************/
+	/*   Non member functions      */
+	/*******************************/
+	
+	export template<typename T>
+	bool operator==(const kVector<T>& v1, const kVector<T>& v2)
+	{
+		if (v1.Size() != v2.Size()) return false;
+		
+		for (size_t i = 0; i < v1.Size(); ++i)
+		{
+			if (v1[i] != v2[i])
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

@@ -14,14 +14,24 @@ int main()
 		std::cout << i << " ";
 	}
 	
-	KSTL::kVector<int> kV2;
-	kV2 = std::move(kV);
+	KSTL::kVector<int> kV2 = { 0, 1, 2, 3 };
 
 	
 	std::cout << std::endl;
 	for (auto& i : kV2)
 	{
 		std::cout << i << " ";
+	}
+
+	std::cout << std::endl;
+
+	if (kV == kV2)
+	{
+		std::cout << "true" << std::endl;
+	}
+	else
+	{
+		std::cout << "false" << std::endl;
 	}
 
 	//******************
