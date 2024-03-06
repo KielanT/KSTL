@@ -35,7 +35,7 @@ export namespace KSTL
 		size_t m_Capacity;
 		size_t m_Size;
 
-		static constexpr size_t DEFAULT_CAPACITY = 1;
+		static constexpr size_t DEFAULT_CAPACITY = 8;
 
 	};
 
