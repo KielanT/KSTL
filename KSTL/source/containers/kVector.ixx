@@ -207,7 +207,7 @@ namespace KSTL
 	/*******************************/
 	
 	export template<typename T>
-	bool operator==(const kVector<T>& v1, const kVector<T>& v2)
+	constexpr bool operator==(const kVector<T>& v1, const kVector<T>& v2)
 	{
 		if (v1.Size() != v2.Size()) return false;
 		
