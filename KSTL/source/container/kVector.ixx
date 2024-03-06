@@ -14,7 +14,7 @@ export namespace KSTL
 		kVector(std::initializer_list<T> list); // Default constructor
 		~kVector(); // Default destructor
 
-		kVector(const kVector&) = delete; // Copy constructor
+		kVector(const kVector& inVector); // Copy constructor
 		kVector(kVector&&) = delete; // Move constructor
 		kVector& operator=(const kVector&) = delete; // Copy assignment operator
 		kVector& operator=(kVector&&) = delete; // Move assignment operator
@@ -25,6 +25,8 @@ export namespace KSTL
 		
 		T* begin();
 		T* end();
+
+		const size_t Size() const;
 
 		T& operator[](size_t index);
 
@@ -48,9 +50,9 @@ export namespace KSTL
 	template<typename T>
 	kVector<T>::kVector(std::initializer_list<T> list)
 	{
-		m_Arr = new T[list.size()];
-		m_Capacity = list.size();
-		m_Size = list.size();
+		m_Arr = { new T[list.size()] };
+		m_Capacity = { list.size() };
+		m_Size = { list.size() };
 		
 		std::copy(list.begin(), list.end(), m_Arr);
 	}
@@ -59,6 +61,19 @@ export namespace KSTL
 	kVector<T>::~kVector()
 	{
 		delete[] m_Arr;
+	}
+
+	template<typename T>
+	kVector<T>::kVector(const kVector& inVector)
+	{
+		m_Arr = { new T[inVector.Size()] };
+		m_Capacity = { inVector.Size() };
+		m_Size = { inVector.Size() };
+
+		for (int i = 0; i < m_Size; ++i)
+		{
+			m_Arr[i] = inVector.m_Arr[i];
+		}
 	}
 
 	template<typename T>
@@ -124,6 +139,13 @@ export namespace KSTL
 		// it has an extra element at the end that gets returned.
 		return &m_Arr[m_Size];
 	}
+
+	template<typename T>
+	const size_t kVector<T>::Size() const
+	{
+		return m_Size;
+	}
+
 
 	template<typename T>
 	T& kVector<T>::operator[](size_t index)
