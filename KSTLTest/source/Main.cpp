@@ -15,7 +15,8 @@ int main()
 	}
 	
 	KSTL::kVector<int> kV2;
-	kV2 = kV;
+	kV2 = std::move(kV);
+
 	
 	std::cout << std::endl;
 	for (auto& i : kV2)

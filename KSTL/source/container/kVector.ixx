@@ -15,12 +15,12 @@ export namespace KSTL
 		~kVector(); // Default destructor
 
 		kVector(const kVector& inVector); // Copy constructor
-		kVector(kVector&&) = delete; // Move constructor
+		kVector(kVector&& inVector); // Move constructor
 		kVector& operator=(const kVector& inVector); // Copy assignment operator
-		kVector& operator=(kVector&&) = delete; // Move assignment operator
+		kVector& operator=(kVector&& inVector); // Move assignment operator
 
 		void Push(const T& data); // Copy
-		void Push(T&& data);
+		void Push(T&& data); // Move;
 		void Pop();
 		
 		T* begin();
@@ -69,6 +69,15 @@ export namespace KSTL
 	}
 
 	template<typename T>
+	kVector<T>::kVector(kVector&& inVector)
+		: m_Arr{ inVector.m_Arr }, m_Capacity{ inVector.m_Capacity }, m_Size{inVector.Size()}
+	{
+		inVector.m_Arr = nullptr;
+		inVector.m_Capacity = 0;
+		inVector.m_Size = 0;
+	}
+
+	template<typename T>
 	kVector<T>& kVector<T>::operator=(const kVector& inVector)
 	{
 		T* temp = new T[inVector.Size()];
@@ -83,6 +92,22 @@ export namespace KSTL
 		delete[] m_Arr;
 		m_Arr = temp;
 		
+		return *this;
+	}
+
+	template<typename T>
+	kVector<T>& kVector<T>::operator=(kVector&& inVector)
+	{
+		delete[] m_Arr; // Delete existing data
+
+		m_Arr = { inVector.m_Arr };
+		m_Capacity = { inVector.m_Capacity };
+		m_Size = { inVector.m_Size };
+
+		inVector.m_Arr = nullptr;
+		inVector.m_Capacity = 0;
+		inVector.m_Size = 0;
+
 		return *this;
 	}
 
