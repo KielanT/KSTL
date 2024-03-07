@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include <array>
 
 import kVector;
 import kArray;
@@ -7,15 +6,12 @@ import kArray;
 
 int main()
 {
-	KSTL::kArray<int, 5> a;
+	KSTL::kArray<int, 5> a = { 0, 1, 2, 3, 5 };
 
-
-
-	a.Print();
-
-	for (size_t i = 0; i < a.Size(); ++i)
+	for (const auto& elem : a)
 	{
-		a[i] = i;
-		std::cout << a[i] << " ";
+		std::cout << elem << " ";
 	}
+	std::cout << std::endl;
+
 }
